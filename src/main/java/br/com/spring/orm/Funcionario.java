@@ -1,16 +1,20 @@
 package br.com.spring.orm;
 
-import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.lang.Nullable;
 
 @Entity
@@ -28,6 +32,13 @@ public class Funcionario {
 	@ManyToOne
 	@JoinColumn(name = "cargo_id", nullable = false)
 	private Cargo cargo;
+	
+	@ManyToMany
+	@Fetch(FetchMode.SELECT)
+	@JoinTable(name = "funcionario_unidades", 
+	joinColumns = {@JoinColumn(name = "funcionario_id")}, 
+	inverseJoinColumns = {@JoinColumn(name = "unidades_id")})
+	private List<UnidadeTrabalho> unidadesDeTrabalho;
 
 	public Integer getId() {
 		return id;
