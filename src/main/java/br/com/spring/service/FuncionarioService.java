@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.spring.orm.Cargo;
 import br.com.spring.orm.Funcionario;
+import br.com.spring.repository.FuncionarioProjeccao;
 import br.com.spring.repository.FuncionarioRespository;
 
 @Service
@@ -36,4 +37,8 @@ public class FuncionarioService {
 	public List<Funcionario> buscarTodosFuncionarios() {
 		return (List<Funcionario>) funcionarioRespository.findAll();
 	}
+	
+	public List<FuncionarioProjeccao> funcionarioPorSalario(){
+		return funcionarioRespository.findFuncionarioPorSalario();
+	};
 }

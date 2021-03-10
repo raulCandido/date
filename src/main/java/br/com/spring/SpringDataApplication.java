@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import br.com.spring.orm.Cargo;
 import br.com.spring.orm.Funcionario;
+import br.com.spring.repository.FuncionarioProjeccao;
 import br.com.spring.service.CargoService;
 import br.com.spring.service.FuncionarioService;
 
@@ -45,11 +46,11 @@ public class SpringDataApplication implements CommandLineRunner {
 		cargoService.salvar(cargo);
 		funcionarioService.salvar(funcionario);
 
-		List<Funcionario> listaFuncionarios = funcionarioService.buscarTodosFuncionarios();
+		List<FuncionarioProjeccao> listaFuncionarios = funcionarioService.funcionarioPorSalario();
 
 		listaFuncionarios.forEach(f -> {
-			System.out.println(
-					"Nome: " + f.getNome() + "\n" + "CPF: " + f.getCpf() + "\n" + "Salario: " + f.getSalario());
+			System.out.println("Nome: " + f.getNome() + "\n" + "CPF: " + f.getCpf() + "\n" + "ID: " + f.getId() + "\n"
+					+ "Datacontratacao: " + f.getDataContratacao().getTime().getMonth());
 			System.out.println("---------------");
 		});
 
