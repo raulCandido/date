@@ -2,8 +2,10 @@ package br.com.spring.service;
 
 import java.util.List;
 
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import br.com.spring.especification.SpecificationFuncionarios;
 import br.com.spring.orm.Cargo;
 import br.com.spring.orm.Funcionario;
 import br.com.spring.repository.FuncionarioProjeccao;
@@ -37,8 +39,18 @@ public class FuncionarioService {
 	public List<Funcionario> buscarTodosFuncionarios() {
 		return (List<Funcionario>) funcionarioRespository.findAll();
 	}
-	
-	public List<FuncionarioProjeccao> funcionarioPorSalario(){
+
+	public List<FuncionarioProjeccao> funcionarioPorSalario() {
 		return funcionarioRespository.findFuncionarioPorSalario();
 	};
+
+	public List<Funcionario> buscarFuncionariosPorMaiorSalario(Double salario) {
+		List<Funcionario> funcionarios = funcionarioRespository.findAll(Specification.where(SpecificationFuncionarios.maiorSalario(salario)));
+		return funcionarios;
+	}
+	
+	public List<Funcionario> buscarFuncionarioComSalarioMaiorOuIgual(Double salario){
+		List<Funcionario> funcionarios = funcionarioRespository.findAll(Specification.where(SpecificationFuncionarios.igualOuMaiorSalario(salario)));
+		return funcionarios;
+	}
 }

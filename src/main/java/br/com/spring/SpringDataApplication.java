@@ -46,11 +46,10 @@ public class SpringDataApplication implements CommandLineRunner {
 		cargoService.salvar(cargo);
 		funcionarioService.salvar(funcionario);
 
-		List<FuncionarioProjeccao> listaFuncionarios = funcionarioService.funcionarioPorSalario();
+		List<Funcionario> listaFuncionarios = funcionarioService.buscarFuncionarioComSalarioMaiorOuIgual(40.0);
 
 		listaFuncionarios.forEach(f -> {
-			System.out.println("Nome: " + f.getNome() + "\n" + "CPF: " + f.getCpf() + "\n" + "ID: " + f.getId() + "\n"
-					+ "Datacontratacao: " + f.getDataContratacao().getTime().getMonth());
+			System.out.println("ID: " + f.getId() + "\n" + "Salario: " + f.getSalario());
 			System.out.println("---------------");
 		});
 
